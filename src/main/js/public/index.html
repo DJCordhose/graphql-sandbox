@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sandbox</title>
+</head>
+<script>
+    const dice = 3;
+    const sides = 6;
+    const query = {
+        query:
+`query RollDice($dice: Int!, $sides: Int) {
+  rollDice(numDice: $dice, numSides: $sides)
+}`,
+        variables: { dice: dice, sides: sides }
+    };
+
+    // created with https://jwt.io/
+
+    // token malformed
+    const jwtTokenInvalid = 'quatsch';
+    const jwtTokenAdmin = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik9sbGkiLCJhZG1pbiI6dHJ1ZX0.dq4VCWRlUnRXFsq7a31b9Q1jRz1jRpOsLpDvPXtUhyo';
+    const jwtTokenUser = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik9sbGkiLCJhZG1pbiI6ZmFsc2V9.cfuk_MBxZf5TybajsxcenXF8SUf0Kd-UT4zfbEWqT4s';
+    // wrong-shhhhhhared-secret
+    const jwtTokenWrongSecret = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxMjM0NTY3ODkwIiwibmFtZSI6Ik9sbGkiLCJhZG1pbiI6dHJ1ZX0.y8S3gWfM1NVVN7CrVNvR84Kdmv8C2GzPM5LkkuZLlPk';
+
+    const jwtToken = jwtTokenAdmin;
+
+    fetch('http://localhost:4000/secure-graphql', {
+        method: 'post',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${jwtToken}`
+        },
+        body: JSON.stringify(query),
+    })
+            .then(response => response.json())
+            .then(response => console.log(response) || response)
+            .then(response => console.log(response.data.rollDice));
+
+
+    fetch('http://localhost:4000/protected', {
+        method: 'get',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${jwtTokenAdmin}`
+        }
+    })
+            .then(response => console.log(response))
+
+</script>
+<body>
+</body>
+</html>

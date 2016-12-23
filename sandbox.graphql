@@ -1,0 +1,8 @@
+query
+{
+customerQuery {
+    customer(id: "2") {
+        firstName
+    }
+}
+}

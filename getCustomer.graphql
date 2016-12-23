@@ -1,0 +1,1 @@
+{customerQuery {customer(id: "id1") {id lastName user {login}}}}
