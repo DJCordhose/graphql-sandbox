@@ -14,7 +14,7 @@ public class Main {
         GraphQLSchema schema = GraphQLSchema.newSchema()
                 .query(queryType)
                 .build();
-        final String query = "{customer(id: \"1\") {id dateOfBirth lastName user {login}}}";
+        final String query = "{customer(id: \"1\") {id lastName user {login}}}";
         final ExecutionResult executionResult = new GraphQL(schema).execute(query);
         final List<GraphQLError> errors = executionResult.getErrors();
         for (GraphQLError error : errors) {
