@@ -1,5 +1,5 @@
 {
-  "name": "",
+  "name": "graphql-sandbox-js-server-example",
   "version": "",
   "scripts": {
     "start": "nodemon ./server.js"
