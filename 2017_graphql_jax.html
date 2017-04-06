@@ -80,20 +80,23 @@
     <div class="slides">
         <section>
             <h2>Warum GraphQL und nicht REST?</h2>
+            <p><a href="https://jax.de/session/warum-graphql-und-nicht-rest/" target="_blank">JAX 2017</a></p>
+            <p>
+                <a href="http://nilshartmann.net">Nils Hartmann</a> / <a href="http://twitter.com/nilshartmann">@nilshartmann</a>
+            </p>
+            <p>
+                <a href="http://zeigermann.eu">Oliver Zeigermann</a> / <a href="http://twitter.com/djcordhose">@DJCordhose</a>
+            </p>
+            <p><small>Folien: <a href="http://djcordhose.github.io/graphql-sandbox/2017_graphql_jax.html">
+                http://djcordhose.github.io/graphql-sandbox/2017_graphql_jax.html
+            </a></small></p>
+
         </section>
 
         <section class="todo">
             <pre>
-- https://jax.de/session/warum-graphql-und-nicht-rest/
-- Motvation: Wozu eigentlich?
-  - Weder Over- noch Underfetching (wichtig bei schlechten Verbindungen z.B. mobil)
-  - Mehr Anleitung durch getypte Beschreibung
-  - Flexiblilität
-  - Validierung
-  - Einheitlich
+  - Einheitlich ??? Was soll das heissen?
   - https://medium.com/@raxwunter/moving-existing-api-from-rest-to-graphql-205bab22c184#.f26ydy2ek
-- Konzepte / Definition GraphQL
-  - Geht mit Relay
 - Demo #1: Github
   - https://developer.github.com/early-access/graphql/explorer/
   - Queries zeigen
@@ -116,6 +119,9 @@
     - https://jaxenter.de/rest-der-bessere-web-service-8988?utm_source=tw&utm_medium=social&utm_campaign=top50xmas
     - https://dev.to/grahamcox82/graphql---yay-or-nay
     - https://www.netguru.co/blog/grapghql-vs-rest
+- Optionaler letzter Teil
+  - GraphQL mit React
+  - Relay und Apollo-Client
             </pre>
 
 <!--
@@ -169,6 +175,49 @@ mutation {
 -->
 
 
+        </section>
+
+        <section  class="todo">
+            <h1>Was ist GraphQL?</h1>
+            <pre>
+                TODO NILS
+                Konzepte / Definition GraphQL
+            </pre>
+        </section>
+
+        <section>
+            <h1>Motvation: Wozu eigentlich GraphQL?</h1>
+        </section>
+
+        <section>
+            <h2>Perfektes Fetching</h2>
+            <ul>
+                <li>
+                    Weder Over- noch Underfechting notwendig
+                    <ul>
+                        <li>Man bekommt alle Daten mit genau einem Request</li>
+                        <li>Man bekommt nicht mehr Daten als man braucht</li>
+                        <li>wichtig bei schlechten Verbindungen, z.B. mobil
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Getypte Beschreibung</h2>
+            <ul>
+                <li>
+                    Mehr Anleitung durch getypte Beschreibung
+                <li>Automatische Validierung
+            </ul>
+        </section>
+        <section>
+            <h2>Flexibilität und Entkopplung</h2>
+            <ul>
+                <li>Client kann beliebige Queries absetzen
+                <li>idealierweise keine Aufwände im Server für neue Schnittstellen
+                <li>Client- und Server-Team können getrennt voneinander entwickeln
+            </ul>
         </section>
     </div>
 
