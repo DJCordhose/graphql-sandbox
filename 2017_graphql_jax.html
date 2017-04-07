@@ -228,14 +228,96 @@ mutation {
         <section>
             <h3>Demo #2: Die JavaScript-Referenz-Implementierung</h3>
         </section>
-        <section class="todo">
-            <pre>
-  - Referenz-Implementierung in JS mit graphiQL
-                http://localhost:4000/graphql
-  - Zeigen getypte, texutelle Definition des Schemas
-  - graphql-sandbox-js/src/main/js
-            </pre>
+
+        <section>
+            <h3>Hello World: GraphiQL</h3>
+            <img src="reference.png">
+            <p><a href="http://localhost:4000/graphql?query=%7B%0A%20%20hello%0A%7D" target="_blank">http://localhost:4000/graphql?query=%7B%0A%20%20hello%0A%7D</a></p>
         </section>
+
+        <section>
+            <h3>Hello World: <em>curl</em></h3>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+curl -X POST \
+-H "Content-Type: application/json" \
+-d '{"query": "{ hello }"}' \
+http://localhost:4000/graphql
+               </code></pre>
+            <div class="fragment">
+                <p>Antwort:</p>
+                <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+{"data":{"hello":"Hello world!"}}
+</code></pre>
+            </div>
+        </section>
+
+        <section>
+            <h2>Typ-Deklarationen</h2>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+type Query {
+  hello: String
+}
+               </code></pre>
+            <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
+type Query {
+  getDie(numSides: Int): RandomDie
+}
+               </code></pre>
+            <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
+type RandomDie {
+  numSides: Int!
+  rollOnce: Int
+  roll(numRolls: Int!): [Int]
+}
+               </code></pre>
+        </section>
+
+        <section>
+            <h3>Passende Query</h3>
+            <img src="getDie.png">
+            <p><small><a href="http://localhost:4000/graphql?query=%7B%0A%20%20getDie(numSides%3A%2010)%20%7B%0A%20%20%20%20numSides%0A%20%20%20%20rollOnce%0A%20%20%20%20roll(numRolls%3A%202)%0A%20%20%7D%0A%7D" target="_blank">
+                http://localhost:4000/graphql?query=...
+            </a></small></p>
+        </section>
+
+        <section>
+            <h2>Code für Resolver</h2>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+const graphqlHTTP = require('express-graphql');
+app.use('/graphql', graphqlHTTP({
+    schema: schema,
+    rootValue: root,
+    graphiql: true
+}));
+               </code></pre>
+            <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
+const root = {
+    hello: () => 'Hello world!',
+    getDie: ({numSides}) => new RandomDie(numSides || 6)
+};
+               </code></pre>
+        </section>
+        <section>
+            <h2>RandomDie-Klasse</h2>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+class RandomDie {
+    constructor(numSides) { this.numSides = numSides; }
+
+    rollOnce() {
+        return 1 + Math.floor(Math.random() * this.numSides);
+    }
+
+    roll({numRolls}) {
+        let output = [];
+        for (let i = 0; i < numRolls; i++) {
+            output.push(this.rollOnce());
+        }
+        return output;
+    }
+}
+               </code></pre>
+        </section>
+
 
         <section>
             <h1>Motvation: Wozu eigentlich GraphQL?</h1>
@@ -310,15 +392,6 @@ mutation {
 
         </section>
 
-        <section class="todo">
-            <pre>
-- Optionaler letzter Teil, je nachdem wie lang die Teil davor noch sind
-  - GraphQL mit React
-  - Relay und Apollo-Client
-            </pre>
-
-        </section>
-
     </div>
 
 </div>
@@ -332,11 +405,11 @@ mutation {
 </script>
 <script>
     Reveal.addEventListener( 'ready', function( event ) {
-        // no fragments, never
-        $('.fragment').removeClass('fragment');
         // only applies presentation version
         if (window.location.hostname.indexOf('localhost') !== -1) {
             Reveal.configure({ controls: false });
+        } else {
+            $('.fragment').removeClass('fragment');
         }
     } );
 </script>

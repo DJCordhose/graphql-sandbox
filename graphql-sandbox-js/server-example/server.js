@@ -39,8 +39,8 @@ class RandomDie {
     }
 
     roll({numRolls}) {
-        var output = [];
-        for (var i = 0; i < numRolls; i++) {
+        let output = [];
+        for (let i = 0; i < numRolls; i++) {
             output.push(this.rollOnce());
         }
         return output;
