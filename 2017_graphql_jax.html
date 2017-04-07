@@ -93,57 +93,31 @@
 
         </section>
 
-        <section class="todo">
-            <pre>
-  - Einheitlich ??? Was soll das heissen?
-  - https://medium.com/@raxwunter/moving-existing-api-from-rest-to-graphql-205bab22c184#.f26ydy2ek
-- Demo #2
-  - Referenz-Implementierung in JS mit graphiQL
-                http://localhost:4000/graphql
-  - Zeigen getypte, texutelle Definition des Schemas
-  - graphql-sandbox-js/src/main/js
-- Demo #3
-   - Java-Implementierung mit GraphQL Tool in Idea
-   - graphql-sandbox-java
-   - https://plugins.jetbrains.com/plugin/8097?pr=idea
-- h2? GraphQL Still necessary?
-- Replacement for REST?
-  - REST noch mal kurz auf einer Folie zusammenfassen:
-    - https://jaxenter.de/rest-der-bessere-web-service-8988?utm_source=tw&utm_medium=social&utm_campaign=top50xmas
-    - https://dev.to/grahamcox82/graphql---yay-or-nay
-    - https://www.netguru.co/blog/grapghql-vs-rest
-- Optionaler letzter Teil
-  - GraphQL mit React
-  - Relay und Apollo-Client
-            </pre>
+        <section>
+            <h3>Demo #1: GraphQL auf Github</h3>
+            <img src="github-graphql.png">
+            <p><small><a href="https://developer.github.com/early-access/graphql/explorer/" target="_blank">https://developer.github.com/early-access/graphql/explorer/</a></small></p>
+        </section>
 
-<!--
-Queries
+        <section>
+            <h3>Autocomplete und Beschreibung</h3>
+            <img src="autocomplete.png" height="500px">
+        </section>
 
-mutation {
-createProject(input:{
-  clientMutationId: "oma",
-  ownerId: "DJCordhose",
-  name: "GraphQLMutationTest",
-  body: "Just a test"
-}) {
-  clientMutationId
-}
-}
+        <section>
+            <h3>Felder mit Argumenten</h3>
+            <img src="parameters.png">
+            <p><small><a href="http://graphql.org/learn/queries/#arguments" target="_blank">http://graphql.org/learn/queries/#arguments</a></small></p>
+        </section>
 
+        <section>
+            <h3>Beispiel: Issues heraussuchen</h3>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
 {
-  viewer {
-    id
-    login
-    email
-    createdAt
-  }
-
-
   repositoryOwner(login: "DJCordhose") {
     repository(name: "architecture") {
-            id
-      issues(first:10) {
+      id
+      issues(first: 10) {
         edges {
           node {
             id
@@ -153,28 +127,113 @@ createProject(input:{
       }
     }
   }
-
 }
+               </code></pre>
+            <p><small>Die ersten 10 Issues des Repositories <em>architecture</em></small></p>
+        </section>
 
+        <section>
+            <h3>Mutations: Daten verändern</h3>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
 mutation {
   addComment(input:{
-    subjectId: "MDQ6VXNlcjM5NDQwOQ==",
-    clientMutationId: "Dackel",
-    body: "Kleiner Kommentar"
+    subjectId: "MDU6SXNzdWUxNzk0ODczMTg=",
+    clientMutationId: "Sandbox",
+    body: "Comment from JAX 2017"
   }) {
     clientMutationId
   }
 }
--->
-
-
+               </code></pre>
+            <p><small>Einem Issue einen Kommentar hinzufügen</small></p>
         </section>
+
+        <section>
+            <h3>Ergebnis auf Github</h3>
+            <img src="testissue.png">
+            <p><a href="https://github.com/DJCordhose/architecture/issues/1" target="_blank">https://github.com/DJCordhose/architecture/issues/1</a></p>
+        </section>
+
+
+        <!--
+        Queries
+
+        mutation {
+        createProject(input:{
+          clientMutationId: "oma",
+          ownerId: "DJCordhose",
+          name: "GraphQLMutationTest",
+          body: "Just a test"
+        }) {
+          clientMutationId
+        }
+        }
+
+        {
+          viewer {
+            id
+            login
+            email
+            createdAt
+          }
+
+
+          repositoryOwner(login: "DJCordhose") {
+            repository(name: "architecture") {
+                    id
+              issues(first:10) {
+                edges {
+                  node {
+                    id
+                    title
+                  }
+                }
+              }
+            }
+          }
+
+        }
+
+        mutation {
+          addComment(input:{
+            subjectId: "MDQ6VXNlcjM5NDQwOQ==",
+            clientMutationId: "Dackel",
+            body: "Kleiner Kommentar"
+          }) {
+            clientMutationId
+          }
+        }
+        -->
+
+
+
+        <!--<section class="todo">-->
+<!--<pre>-->
+  <!-- - Queries zeigen-->
+    <!-- - Vergleich mit REST-API von Github-->
+  <!-- - Fragments-->
+  <!-- - Variablen-->
+<!--</pre>-->
+        <!--</section>-->
 
         <section  class="todo">
             <h1>Was ist GraphQL?</h1>
+            <p><a href="http://graphql.org/">http://graphql.org/</a></p>
             <pre>
                 TODO NILS
                 Konzepte / Definition GraphQL
+            </pre>
+        </section>
+
+        <section>
+            <h3>Demo #2: Die JavaScript-Referenz-Implementierung</h3>
+        </section>
+        <section class="todo">
+            <pre>
+  - Referenz-Implementierung in JS mit graphiQL
+                http://localhost:4000/graphql
+  - Zeigen getypte, texutelle Definition des Schemas
+  - graphql-sandbox-js/src/main/js
             </pre>
         </section>
 
@@ -210,23 +269,56 @@ mutation {
                 <li>Client kann beliebige Queries absetzen
                 <li>idealierweise keine Aufwände im Server für neue Schnittstellen
                 <li>Client- und Server-Team können getrennt voneinander entwickeln
+                <li>Erweiterungen ohne Versionierung der API
             </ul>
         </section>
 
         <section>
-            <h2>Demo #1: GraphQL auf Github</h2>
-            <p><a href="https://developer.github.com/early-access/graphql/explorer/" target="_blank">https://developer.github.com/early-access/graphql/explorer/</a></p>
+            <h2>Einheitlichkeit</h2>
+            <ul>
+                <li>Es gibt nur noch einen Endpunkt
+                <li>APIs haben einen ähnlichen Aufbau
+                <li>Kommunikation auf jeden Fall über JSON
+            </ul>
+        </section>
+
+        <section>
+            <h3>Demo #3: Implementierung in Java: <em>graphql-java</em></h3>
+        </section>
+        <section class="todo">
+            <pre>
+-
+   - Java-Implementierung mit GraphQL Tool in Idea
+   - graphql-sandbox-java
+   - https://plugins.jetbrains.com/plugin/8097?pr=idea
+            </pre>
+        </section>
+
+        <section>
+            <h3>Müssen wir jetzt alle GraphQL machen?</h3>
         </section>
 
         <section class="todo">
-<pre>
-  - Queries zeigen
-    - Vergleich mit REST-API von Github
-  - Mutation zeigen
-  - Fragments
-  - Variablen
-</pre>
+            <pre>
+- h2? GraphQL Still necessary?
+- Replacement for REST?
+  - REST noch mal kurz auf einer Folie zusammenfassen:
+    - https://jaxenter.de/rest-der-bessere-web-service-8988?utm_source=tw&utm_medium=social&utm_campaign=top50xmas
+    - https://dev.to/grahamcox82/graphql---yay-or-nay
+    - https://www.netguru.co/blog/grapghql-vs-rest
+            </pre>
+
         </section>
+
+        <section class="todo">
+            <pre>
+- Optionaler letzter Teil, je nachdem wie lang die Teil davor noch sind
+  - GraphQL mit React
+  - Relay und Apollo-Client
+            </pre>
+
+        </section>
+
     </div>
 
 </div>
