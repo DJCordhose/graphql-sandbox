@@ -94,7 +94,7 @@
         </section>
 
         <section>
-            <h3>Demo #1: GraphQL auf Github</h3>
+            <h3>Einführende Demo: GraphQL auf Github</h3>
             <img src="github-graphql.png">
             <p><small><a href="https://developer.github.com/early-access/graphql/explorer/" target="_blank">https://developer.github.com/early-access/graphql/explorer/</a></small></p>
         </section>
@@ -205,17 +205,6 @@ mutation {
         }
         -->
 
-
-
-        <!--<section class="todo">-->
-<!--<pre>-->
-  <!-- - Queries zeigen-->
-    <!-- - Vergleich mit REST-API von Github-->
-  <!-- - Fragments-->
-  <!-- - Variablen-->
-<!--</pre>-->
-        <!--</section>-->
-
         <section  class="todo">
             <h1>Was ist GraphQL?</h1>
             <p><a href="http://graphql.org/">http://graphql.org/</a></p>
@@ -226,7 +215,7 @@ mutation {
         </section>
 
         <section>
-            <h3>Demo #2: Die JavaScript-Referenz-Implementierung</h3>
+            <h2>Die JavaScript-Referenz-Implementierung</h2>
         </section>
 
         <section>
@@ -365,31 +354,95 @@ class RandomDie {
         </section>
 
         <section>
-            <h3>Demo #3: Implementierung in Java: <em>graphql-java</em></h3>
-        </section>
-        <section class="todo">
-            <pre>
--
-   - Java-Implementierung mit GraphQL Tool in Idea
-   - graphql-sandbox-java
-   - https://plugins.jetbrains.com/plugin/8097?pr=idea
-            </pre>
+            <h2>Implementierung in Java: <em>graphql-java</em></h2>
         </section>
 
         <section>
-            <h3>Müssen wir jetzt alle GraphQL machen?</h3>
+            <h3>IDEA Unterstützung</h3>
+            <p>Plugin: <a href="https://plugins.jetbrains.com/plugin/8097?pr=idea" target="_blank">https://plugins.jetbrains.com/plugin/8097?pr=idea</a></p>
         </section>
 
-        <section class="todo">
-            <pre>
-- h2? GraphQL Still necessary?
-- Replacement for REST?
-  - REST noch mal kurz auf einer Folie zusammenfassen:
-    - https://jaxenter.de/rest-der-bessere-web-service-8988?utm_source=tw&utm_medium=social&utm_campaign=top50xmas
-    - https://dev.to/grahamcox82/graphql---yay-or-nay
-    - https://www.netguru.co/blog/grapghql-vs-rest
-            </pre>
+        <section>
+            <img src="idea.png">
+        </section>
 
+        <section>
+            <h3>Code und Typ-Deklaration in einem</h3>
+            <pre><code data-trim contenteditable class="line-numbers java" data-leftpad>
+public class Customer {
+    @GraphQLField
+    @GraphQLNonNull
+    public String id;
+
+    @GraphQLField
+    public String firstName;
+
+    @GraphQLField
+    public String lastName;
+
+    @GraphQLField
+    public User user;
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Servlet</h3>
+            <pre><code data-trim contenteditable class="line-numbers java" data-leftpad>
+public class SandboxGraphQLServlet extends GraphQLServlet {
+
+    public void init(ServletConfig config) {
+        bindQueryProvider(new GraphQLQueryProvider() {
+            @Override
+            public GraphQLObjectType getQuery() {
+                return Schema.getGraphQLObjectType();
+            }
+        });
+        bindMutationProvider(new GraphQLMutationProvider() { ... }
+    }
+}
+
+            </code></pre>
+        </section>
+
+        <section>
+            <h3>Was passiert in der Query?</h3>
+            <pre><code data-trim contenteditable class="line-numbers java" data-leftpad>
+public static GraphQLObjectType getGraphQLObjectType() {
+  return newObject()
+    .field(newFieldDefinition()
+        .type(GraphQLAnnotations.object(Customer.class))
+        .name("customer")
+        .argument(new GraphQLArgument("id",
+                                      new GraphQLNonNull(GraphQLID)))
+        .dataFetcher(environment -> {
+            final String id = environment.getArgument("id");
+            return customerServiceImpl.findCustomerById(id);
+        }).build()
+    ).build();
+}
+            </code></pre>
+        </section>
+
+        <section>
+            <h1>Müssen wir jetzt alle GraphQL machen?</h1>
+        </section>
+
+        <section>
+            <h2>Er kommt drauf an</h2>
+            <ul>
+                <li>REST ist immer noch de-facto-Standard
+                <li>Serverseitige Standard-Bibliotheken für GraphQL fehlen zum Teil noch
+                <li>GraphQL-Queries werden mit POST gemacht, kann Probleme beim Caching bedeuten
+            </ul>
+        </section>
+
+        <section>
+            <h2>HTTP2</h2>
+            <ul>
+                <li>Erlaubt das Senden vieler Requests über dieselbe Verbindung
+                <li>Macht das Over- und Underfetching-Argument schwächer
+            </ul>
         </section>
 
     </div>
