@@ -97,7 +97,7 @@
             </a></small></p>
 
         </section>
-        
+
         <section class="todo">
             <pre>
 Optional demo: GraphQL with React/Apollo Client
@@ -114,9 +114,14 @@ Optional demo: GraphQL with React/Apollo Client
   - no versioning needed
             </pre>
         </section>
+        <section>
+            <h2>GraphQL</h2>
+            <h3><em>A query language for your API</em></h3>
+            <p><a href="http://graphql.org/">http://graphql.org/</a></p>
+        </section>
 
         <section>
-            <h3>Einführende Demo: GraphQL auf Github</h3>
+            <h3>Beispiel: GraphQL API für Github</h3>
             <img src="github-graphql.png">
             <p><small><a href="https://developer.github.com/early-access/graphql/explorer/" target="_blank">https://developer.github.com/early-access/graphql/explorer/</a></small></p>
         </section>
@@ -133,9 +138,10 @@ Optional demo: GraphQL with React/Apollo Client
         </section>
 
         <section>
-            <h3>Beispiel: Issues heraussuchen</h3>
+            <h3>Queries - Daten lesen</h3>
+            <p>Beispiel: Issues heraussuchen</p>
             <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-{
+query {
   repositoryOwner(login: "DJCordhose") {
     repository(name: "architecture") {
       id
@@ -155,7 +161,8 @@ Optional demo: GraphQL with React/Apollo Client
         </section>
 
         <section>
-            <h3>Mutations: Daten verändern</h3>
+            <h3>Mutations - Daten verändern</h3>
+            <p>Beispiel: Einem Issue einen Kommentar hinzufügen</p>
             <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
 mutation {
   addComment(input:{
@@ -167,7 +174,6 @@ mutation {
   }
 }
                </code></pre>
-            <p><small>Einem Issue einen Kommentar hinzufügen</small></p>
         </section>
 
         <section>
@@ -237,7 +243,57 @@ mutation {
         </section>
 
         <section>
+            <h1>Motivation: Wozu eigentlich GraphQL?</h1>
+        </section>
+
+        <section>
+            <h2>Perfektes Fetching</h2>
+            <ul>
+                <li>
+                    Weder Over- noch Underfechting notwendig
+                    <ul>
+                        <li>Man bekommt alle Daten mit genau einem Request</li>
+                        <li>Man bekommt nicht mehr Daten als man braucht</li>
+                        <li>wichtig bei schlechten Verbindungen, z.B. mobil
+                    </ul>
+                </li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Getypte API Beschreibung</h2>
+            <ul>
+                <li>Mehr Anleitung durch getypte Beschreibung
+                <li>Automatische Validierung durch GraphQL
+            </ul>
+        </section>
+        <section>
+            <h2>Flexibilität und Entkopplung</h2>
+            <ul>
+                <li>Client kann beliebige Queries absetzen
+                <li>idealerweise keine Aufwände im Server für neue Schnittstellen
+                <li>Client- und Server-Team können getrennt voneinander entwickeln
+                <li>Erweiterungen/Änderungen ohne Versionierung der API möglich
+            </ul>
+        </section>
+
+        <section>
+            <h2>Einheitlichkeit</h2>
+            <ul>
+                <li>Es gibt nur noch einen Endpunkt
+                <li>APIs haben einen ähnlichen Aufbau
+                <li>Kommunikation auf jeden Fall über JSON
+            </ul>
+        </section>
+
+
+        <section>
+            <h1>GraphQL Server</h1>
+        </section>
+
+        <section>
             <h2>Die JavaScript-Referenz-Implementierung</h2>
+            <p><a href="http://graphql.org/graphql-js/" target="_blank">http://graphql.org/graphql-js/</a></p>
         </section>
 
         <section>
@@ -330,53 +386,10 @@ class RandomDie {
         </section>
 
 
-        <section>
-            <h1>Motvation: Wozu eigentlich GraphQL?</h1>
-        </section>
-
-        <section>
-            <h2>Perfektes Fetching</h2>
-            <ul>
-                <li>
-                    Weder Over- noch Underfechting notwendig
-                    <ul>
-                        <li>Man bekommt alle Daten mit genau einem Request</li>
-                        <li>Man bekommt nicht mehr Daten als man braucht</li>
-                        <li>wichtig bei schlechten Verbindungen, z.B. mobil
-                    </ul>
-                </li>
-            </ul>
-        </section>
-
-        <section>
-            <h2>Getypte Beschreibung</h2>
-            <ul>
-                <li>
-                    Mehr Anleitung durch getypte Beschreibung
-                <li>Automatische Validierung
-            </ul>
-        </section>
-        <section>
-            <h2>Flexibilität und Entkopplung</h2>
-            <ul>
-                <li>Client kann beliebige Queries absetzen
-                <li>idealierweise keine Aufwände im Server für neue Schnittstellen
-                <li>Client- und Server-Team können getrennt voneinander entwickeln
-                <li>Erweiterungen ohne Versionierung der API
-            </ul>
-        </section>
-
-        <section>
-            <h2>Einheitlichkeit</h2>
-            <ul>
-                <li>Es gibt nur noch einen Endpunkt
-                <li>APIs haben einen ähnlichen Aufbau
-                <li>Kommunikation auf jeden Fall über JSON
-            </ul>
-        </section>
 
         <section>
             <h2>Implementierung in Java: <em>graphql-java</em></h2>
+            <p><a href="https://github.com/graphql-java/graphql-java">https://github.com/graphql-java/graphql-java</a></p>
         </section>
 
         <section>
@@ -447,11 +460,12 @@ public static GraphQLObjectType getGraphQLObjectType() {
         </section>
 
         <section>
+            <h3>Fazit</h3>
             <h1>Müssen wir jetzt alle GraphQL machen?</h1>
         </section>
 
         <section>
-            <h2>Er kommt drauf an</h2>
+            <h2>Es kommt drauf an...</h2>
             <ul>
                 <li>REST ist immer noch de-facto-Standard
                 <li>Serverseitige Standard-Bibliotheken für GraphQL fehlen zum Teil noch
