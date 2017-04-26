@@ -59,6 +59,57 @@ describe('PersonModel', function() {
     });
   });
 
+  it('should returns fields from nested objects', function() {
+    const query = `{ getPersonById(id: 2) { address { city } } }`;
+    return runSuccessQuery(query).then(response => {
+      expect(response).to.eql({
+        getPersonById: {
+          address: { city: 'Hamburg' }
+        }
+      });
+    })
+  });
+
+  it('should return objects from a method on nested object', function() {
+    const query = `{ findPersonsLivingIn(city: "Hamburg") { name phonesWithType(type: PRIVATE) { phoneType, phoneNumber } } }`;
+    return runSuccessQuery(query).then(response => {
+      expect(response).to.eql({
+        findPersonsLivingIn: [
+          {
+            name: 'Peter', phonesWithType: [
+            { phoneType: 'PRIVATE', phoneNumber: '123' },
+            { phoneType: 'PRIVATE', phoneNumber: '456' },
+          ]
+          },
+          {
+            name: 'Klaus', phonesWithType: [
+            { phoneType: 'PRIVATE', phoneNumber: '555' }
+          ]
+          }
+        ]
+      });
+    })
+  });
+
+  it('should return empty array when no persons found for a city', function() {
+    const query = `{ findPersonsLivingIn(city: "No Where") { name } }`;
+    return runSuccessQuery(query).then(response => {
+      expect(response).to.eql({
+        findPersonsLivingIn: []
+      });
+    })
+  });
+
+  it('should return two persons by Id using field aliases', function() {
+    const query = `{ peter: getPersonById(id: 1) { name } klaus: getPersonById(id: 2) { name } }`;
+    return runSuccessQuery(query).then(response => {
+      expect(response).to.eql({
+        peter: { name: 'Peter' },
+        klaus: { name: 'Klaus' }
+      })
+    });
+  });
+
   it('should return an error when mandatory data is not returned', function() {
     // By it's schema definition getPersonById *always* returns an object
     // If the query does *not* return a person it should fail (and not return
