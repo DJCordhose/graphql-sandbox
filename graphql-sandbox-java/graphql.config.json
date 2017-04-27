@@ -22,7 +22,7 @@
   "README_endpoints": "A list of GraphQL endpoints that can be queried from '.graphql' files in the IDE",
   "endpoints" : [
     {
-      "name": "Default (http://localhost:8080)",
+      "name": "LOCALHOST JETTY 8080",
       "url": "http://localhost:8080",
       "options" : {
         "headers": {
