@@ -1,1 +1,1 @@
-query { customer (id: "c1") { firstName address { city } phones { phoneNumber phoneType }}}
+{ customer (id: "c1") { lastName, address {city, email}, phones { phoneNumber } } }

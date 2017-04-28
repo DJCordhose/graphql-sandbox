@@ -14,7 +14,7 @@ public class CustomerService {
 
     public CustomerService() {
 
-        final Address addressPeter = new Address("Haupstrasse 3", "Hamburg", null);
+        final Address addressPeter = new Address("Haupstrasse 3", "Hamburg", "some@where.net");
         final Address addressSusi = new Address("Bahnhofstraße 19", "Hamburg", "susi@mail.com");
         final Address addressNadine = new Address("Lindenallee 49", "Berlin", "n@dine.com");
 
