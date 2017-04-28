@@ -100,18 +100,7 @@
 
         <section class="todo">
             <pre>
-Optional demo: GraphQL with React/Apollo Client
-- https://www.graph.cool/docs/quickstart/
-  - /c/Users/olive/Development/js/react-apollo-todo-example
-  - https://github.com/gsans/handsup-react#graphcool---handsup-schema
-- Tools-Section:
-  - https://github.com/APIs-guru/graphql-faker
-  - https://github.com/APIs-guru/graphql-voyager
-- Advantages of GraphQL (might already be in slides)
-  - Delivers what you want / need
-  - What fields you get is explicit
-  - Usage of fields can be monitored and tracked
-  - no versioning needed
+- Was ist GraphQL (Nils oder einfach löschen wenn unnötig)
             </pre>
         </section>
         <section>
@@ -249,6 +238,7 @@ mutation {
         <section>
             <h2>Perfektes Fetching</h2>
             <ul>
+                <li>Liefert genau das was man braucht, weder mehr noch weniger
                 <li>
                     Weder Over- noch Underfechting notwendig
                     <ul>
@@ -257,6 +247,7 @@ mutation {
                         <li>wichtig bei schlechten Verbindungen, z.B. mobil
                     </ul>
                 </li>
+                <li>Was man bekommt ist explizit in der Query angegeben
             </ul>
         </section>
 
@@ -276,6 +267,7 @@ mutation {
                 <li>idealerweise keine Aufwände im Server für neue Schnittstellen
                 <li>Client- und Server-Team können getrennt voneinander entwickeln
                 <li>Erweiterungen/Änderungen ohne Versionierung der API möglich
+                <li>Keine Versionierung der API notwendig
             </ul>
         </section>
 
@@ -285,6 +277,7 @@ mutation {
                 <li>Es gibt nur noch einen Endpunkt
                 <li>APIs haben einen ähnlichen Aufbau
                 <li>Kommunikation auf jeden Fall über JSON
+                <li>Welche Felder eigentlich benutzt werden kann überprüft und getrackt werden
             </ul>
         </section>
 
@@ -462,6 +455,21 @@ public static GraphQLObjectType getGraphQLObjectType() {
         </section>
 
         <section>
+            <h3>Tools</h3>
+            <ul>
+                <li><a href="https://github.com/APIs-guru/graphql-faker" target="_blank">https://github.com/APIs-guru/graphql-faker</a>: Mocked GraphQL Backend für Development
+                <li><a href="https://github.com/APIs-guru/graphql-voyager" target="_blank">https://github.com/APIs-guru/graphql-voyager</a>: GraphQL API Browsing als interaktiver Graph
+                <li><a href="https://www.graph.cool" target="_blank">https://www.graph.cool</a>: "serverless" GraphQL auf AWS Lambda
+<!--
+                Optional demo: GraphQL with React/Apollo Client
+                - https://www.graph.cool/docs/quickstart/
+                - /c/Users/olive/Development/js/react-apollo-todo-example
+                - https://github.com/gsans/handsup-react#graphcool-&#45;&#45;handsup-schema
+-->
+            </ul>
+        </section>
+
+        <section>
             <h3>Fazit</h3>
             <h1>Müssen wir jetzt alle GraphQL machen?</h1>
         </section>
@@ -472,6 +480,7 @@ public static GraphQLObjectType getGraphQLObjectType() {
                 <li>REST ist immer noch de-facto-Standard
                 <li>Serverseitige Standard-Bibliotheken für GraphQL fehlen zum Teil noch
                 <li>GraphQL-Queries werden mit POST gemacht, kann Probleme beim Caching bedeuten
+                <li>Für serverseitige Kommunikation (Microservices) scheinen binäre, getypte Protokolle wie <a href="http://www.grpc.io/" target="_blank">http://www.grpc.io/</a> noch geeigneter
             </ul>
         </section>
 
