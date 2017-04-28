@@ -1,1 +1,1 @@
-{customerQuery {customer(id: "id1") {id lastName user {login}}}}
+query { customer (id: "c1") { firstName address { city } phones { phoneNumber phoneType }}}

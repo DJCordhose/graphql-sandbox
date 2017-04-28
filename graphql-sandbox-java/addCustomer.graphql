@@ -1,1 +1,1 @@
- mutation {addCustomer(firstName: "Nils", lastName: "Hartmann") {id firstName}}
+mutation {addCustomer(firstName: "Jane", lastName: "Doe", email: "jd@home.net") {id firstName}}

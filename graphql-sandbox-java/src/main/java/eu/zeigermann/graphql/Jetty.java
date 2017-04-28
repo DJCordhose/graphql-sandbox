@@ -1,6 +1,9 @@
 package eu.zeigermann.graphql;
 
+import graphql.schema.GraphQLSchema;
+import graphql.servlet.SimpleGraphQLServlet;
 import org.eclipse.jetty.server.Server;
+import org.eclipse.jetty.servlet.ServletHolder;
 import org.eclipse.jetty.webapp.WebAppContext;
 
 /**
@@ -19,7 +22,12 @@ public class Jetty {
         WebAppContext root = new WebAppContext();
 
         root.setContextPath("/");
-        root.setDescriptor(webappDirLocation+"/WEB-INF/web.xml");
+//        root.setDescriptor(webappDirLocation+"/WEB-INF/web.xml");
+        final GraphQLSchema customerSchema = CustomerSchema.createCustomerQuerySchema();
+
+        final SimpleGraphQLServlet graphQLServlet = new SimpleGraphQLServlet(customerSchema, null);
+
+        root.addServlet(new ServletHolder(graphQLServlet), "/*");
         root.setResourceBase(webappDirLocation);
         root.setParentLoaderPriority(true);
 

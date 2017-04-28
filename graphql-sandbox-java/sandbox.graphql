@@ -1,8 +1,5 @@
-query
-{
-customerQuery {
-    customer(id: "2") {
+query customerQuery {
+    customer(id: "c2") {
         firstName
     }
-}
 }
