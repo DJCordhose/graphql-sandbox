@@ -1,5 +1,6 @@
 package eu.zeigermann.graphql.model;
 
+import graphql.annotations.GraphQLDescription;
 import graphql.annotations.GraphQLField;
 import graphql.annotations.GraphQLName;
 import graphql.annotations.GraphQLNonNull;
@@ -21,19 +22,24 @@ public class Customer {
     }
 
     @GraphQLField
+    @GraphQLDescription("The first name of this customer")
     private String firstName;
+    @GraphQLDescription("The last name of this customer")
     @GraphQLField
     private String lastName;
 
     @GraphQLField
     @GraphQLNonNull
+    @GraphQLDescription("The Address of this customer")
     private Address address;
 
     @GraphQLField
     @GraphQLNonNull
+    @GraphQLDescription("Returns all known Phone numbers of this Customer")
     private List<Phone> phones = new LinkedList<>();
 
     @GraphQLField
+    @GraphQLDescription("Returns all phone numbers of the specified type")
     public List<Phone> phonesWithType(@GraphQLName("type") PhoneType type) {
         // DOES NOT WORK CURRENTLY DUE TO THIS BUG: https://github.com/graphql-java/graphql-java-annotations/issues/77
         return phones.stream().filter(phone -> phone.getPhoneType() == type).collect(Collectors.toList());

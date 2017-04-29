@@ -220,6 +220,62 @@ mutation {
         </section>
 
         <section>
+            <h3>Was ist GraphQL</h3>
+            <ol>
+                <li>Abfragesprache zum Zugriff auf eine API</li>
+                <li>Typsystem zum Beschreiben der API</li>
+                <li>Runtime zum Ausführen eines Zugriffs</li>
+            </ol>
+        </section>
+        <section>
+            <h3>Abfragesprache</h3>
+            <ul>
+                <li>Strukturierte Sprache zum Zugriff auf eine API</li>
+                <li>Sieht aus wie JSON (ist es aber nicht)</li>
+                <li>Abgefragt werden einzelne Felder von (verschachtelten) Objekten</li>
+                <li>Felder können Parameter haben (ähnlich wie Funktionen)</li>
+            </ul>
+            <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
+                query { customer (id: "c1") { lastname, adress { email } } }
+            </code></pre>
+
+        </section>
+        <section>
+            <h3>Abfragesprache</h3>
+            <p>Operations</p>
+        <ul>
+                <li>Eine Abfrage besteht aus mindestens einer <em>Operation</em>:
+                    <ul>
+                        <li><em>Query</em>: Eine lesende Anfrage</li>
+                        <li><em>Mutation</em>: Eine Anfrage zum Schreiben/Verändern von Daten</ul>
+                </li>
+                <li>Eine Operation kann Parameter und einen Rückgabewert haben</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Typsystem</h2>
+            <p>Beschreibt die API (Objekte und Operations)</p>
+            <ul>
+                <li>Wird von GraphQL verwendet, um eine Anfrage zu validieren</li>
+                <li>Skalare Typen, Objekte, Interfaces, Listen, Enums, ... </li>
+                <li>Fehlerhafte Anfragen werden abgelehnt</li>
+                <li>Grundlage für Tool-Support (Syntax Checking, Dokumentation, ...)</li>
+            </ul>
+        </section>
+
+        <section>
+            <h2>Runtime (GraphQL Server)</h2>
+            <p>Führt GraphQL Anfragen aus</p>
+            <ul>
+                <li>Bibliotheken für diverse Sprachen</li>
+                <li>Parsen und Validieren der Anfragen</li>
+                <li>Serialisieren der Antworten</li>
+                <li>Ermitteln der Daten (z.B. aus Datenbank) muss selber programmiert werden</li>
+            </ul>
+        </section>
+
+        <section>
             <h1>Motivation: Wozu eigentlich GraphQL?</h1>
         </section>
 
