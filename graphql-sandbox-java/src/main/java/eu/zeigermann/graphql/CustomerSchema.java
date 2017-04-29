@@ -58,7 +58,7 @@ public class CustomerSchema {
         return queryType;
     }
 
-    private static GraphQLObjectType createMutationType(GraphQLObjectType customerType) {
+    private static GraphQLObjectType buildCustomerMutationType(GraphQLObjectType customerType) {
         GraphQLObjectType mutationType = newObject()
                 .name("customerMutation")
                 .description("Modifications for Customers")
@@ -87,7 +87,7 @@ public class CustomerSchema {
 
         GraphQLSchema schema = GraphQLSchema.newSchema()
                 .query(buildCustomerQueryType(customerType))
-                .mutation(createMutationType(customerType))
+                .mutation(buildCustomerMutationType(customerType))
                 .build();
         return schema;
     }

@@ -47,7 +47,7 @@ class Customer {
     }
 
     phonesWithType({ type }) {
-        return this.phones.filter(phone => phone.phoneType === type);
+        return this.phones && this.phones.filter(phone => phone.phoneType === type);
     }
 }
 

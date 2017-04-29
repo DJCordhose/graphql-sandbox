@@ -98,16 +98,32 @@
 
         </section>
 
-        <section class="todo">
-            <pre>
-- Was ist GraphQL (Nils oder einfach löschen wenn unnötig)
-            </pre>
-        </section>
         <section>
             <h2>GraphQL</h2>
             <h3><em>A query language for your API</em></h3>
             <p><a href="http://graphql.org/">http://graphql.org/</a></p>
         </section>
+
+        <section>
+            <h2>GraphQL</h2>
+            <ul>
+                <li class="fragment"><em><b>Query Sprache</b></em> zur strukturierten Abfrage von Daten
+                <ul>
+                    <li>Abgefragt werden Felder
+                    <li>Syntax ähnlich wie JSON
+                </ul>
+                </li>
+                <li class="fragment"><em><b>Typsystem</b></em> zur Beschreibung der API
+                    <ul>
+                        <li>API Dokumentation
+                        <li>Fehlerüberprüfung durch GraphQL
+                        <li>Tool-Support (z.B. Code Completion in IDE)</li>
+                    </ul>
+                <li class="fragment"><em><b>Laufzeitumgebung</b></em> zur Auführung der Queries auf einem Server</li>
+            </ul>
+        </section>
+
+
 
         <section>
             <h3>Beispiel: GraphQL API für Github</h3>
@@ -116,8 +132,13 @@
         </section>
 
         <section>
-            <h3>Autocomplete und Beschreibung</h3>
+            <h3>Autocomplete</h3>
             <img src="autocomplete.png" height="500px">
+        </section>
+
+        <section>
+            <h3>Dokumentation</h3>
+            <img src="github-docs.png" height="500px">
         </section>
 
         <section>
@@ -148,6 +169,32 @@ query {
                </code></pre>
             <p><small>Die ersten 10 Issues des Repositories <em>architecture</em></small></p>
         </section>
+        <section>
+            <h3>Queries - Daten lesen</h3>
+            <p>Ergebnis</p>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+{ "data": {
+    "repositoryOwner": {
+      "repository": {
+        "id": "MDEwOlJlcG9zaXRvcnk2MDE1NTgyMA==",
+        "issues": {
+          "edges": [
+            {
+              "node": {
+                "id": "MDU6SXNzdWUxNzk0ODczMTg=",
+                "title": "TestIssue"
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+               </code></pre>
+            <p><small>Die ersten 10 Issues des Repositories <em>architecture</em></small></p>
+        </section>
+
 
         <section>
             <h3>Mutations - Daten verändern</h3>
@@ -166,69 +213,10 @@ mutation {
         </section>
 
         <section>
-            <h3>Ergebnis auf Github</h3>
+            <h3>Mutations - Daten verändern</h3>
+            <p>Ergebnis der Ausführung auf GitHub</p>
             <img src="testissue.png">
             <p><a href="https://github.com/DJCordhose/architecture/issues/1" target="_blank">https://github.com/DJCordhose/architecture/issues/1</a></p>
-        </section>
-
-
-        <!--
-        Queries
-
-        mutation {
-        createProject(input:{
-          clientMutationId: "oma",
-          ownerId: "DJCordhose",
-          name: "GraphQLMutationTest",
-          body: "Just a test"
-        }) {
-          clientMutationId
-        }
-        }
-
-        {
-          viewer {
-            id
-            login
-            email
-            createdAt
-          }
-
-
-          repositoryOwner(login: "DJCordhose") {
-            repository(name: "architecture") {
-                    id
-              issues(first:10) {
-                edges {
-                  node {
-                    id
-                    title
-                  }
-                }
-              }
-            }
-          }
-
-        }
-
-        mutation {
-          addComment(input:{
-            subjectId: "MDQ6VXNlcjM5NDQwOQ==",
-            clientMutationId: "Dackel",
-            body: "Kleiner Kommentar"
-          }) {
-            clientMutationId
-          }
-        }
-        -->
-
-        <section  class="todo">
-            <h1>Was ist GraphQL?</h1>
-            <p><a href="http://graphql.org/">http://graphql.org/</a></p>
-            <pre>
-                TODO NILS
-                Konzepte / Definition GraphQL
-            </pre>
         </section>
 
         <section>
@@ -267,7 +255,6 @@ mutation {
                 <li>idealerweise keine Aufwände im Server für neue Schnittstellen
                 <li>Client- und Server-Team können getrennt voneinander entwickeln
                 <li>Erweiterungen/Änderungen ohne Versionierung der API möglich
-                <li>Keine Versionierung der API notwendig
             </ul>
         </section>
 
@@ -277,7 +264,7 @@ mutation {
                 <li>Es gibt nur noch einen Endpunkt
                 <li>APIs haben einen ähnlichen Aufbau
                 <li>Kommunikation auf jeden Fall über JSON
-                <li>Welche Felder eigentlich benutzt werden kann überprüft und getrackt werden
+                <li>Welche Felder wirklich benutzt werden kann überprüft und getrackt werden
             </ul>
         </section>
 
@@ -312,9 +299,31 @@ http://localhost:4000/graphql
 </code></pre>
             </div>
         </section>
+        <section>
+            <h2>Typ-Deklarationen</h2>
+            <pre class="fragment"><code  style="max-height: none" data-trim contenteditable class="line-numbers" data-leftpad>
+type Customer {
+  # Mandatory field (note the !)
+  id: ID!
+
+  firstName: String
+  address: Address
+
+  # List of Phones
+  phones: [Phone]
+
+  # Field with (mandatory) argument
+  phonesWithType(type: PhoneType!): [Phone]
+}
+# Enum Value
+enum PhoneType { PRIVATE, BUSINESS }
+type Phone { type: PhoneType!, number: String! }
+               </code></pre>
+        </section>
 
         <section>
             <h2>Typ-Deklarationen</h2>
+            <p>Queries und Mutations</p>
             <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
 type Query {
   hello: String
@@ -322,59 +331,81 @@ type Query {
                </code></pre>
             <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
 type Query {
-  getDie(numSides: Int): RandomDie
+  customer(id: ID): Customer
 }
                </code></pre>
             <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
-type RandomDie {
-  numSides: Int!
-  rollOnce: Int
-  roll(numRolls: Int!): [Int]
+type Mutation {
+  addCustomer(lastName: String, email: String!): Customer!
 }
                </code></pre>
         </section>
 
         <section>
             <h3>Passende Query</h3>
-            <img src="getDie.png">
-            <p><small><a href="http://localhost:4000/graphql?query=%7B%0A%20%20getDie(numSides%3A%2010)%20%7B%0A%20%20%20%20numSides%0A%20%20%20%20rollOnce%0A%20%20%20%20roll(numRolls%3A%202)%0A%20%20%7D%0A%7D" target="_blank">
+            <img src="query.png">
+            <p><small><a href="http://localhost:4000/graphql?query=%7B%0A%20%20customer(id%3A%20%22c1%22)%20%7B%0A%20%20%20%20lastName%2C%0A%20%20%20%20address%20%7B%20email%20%7D%2C%0A%20%20%20%20businessPhone%3A%20phonesWithType(type%3ABUSINESS)%20%7B%0A%20%20%20%20%20%20phoneNumber%0A%20%20%20%20%7D%0A%20%20%7D%0A%7Dquery" target="_blank">
                 http://localhost:4000/graphql?query=...
             </a></small></p>
         </section>
 
         <section>
-            <h2>Code für Resolver</h2>
+            <h2>Code für Schema</h2>
             <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+const { buildSchema } = require('graphql');
+const customerSchema = buildSchema(`
+type Customer { . . . }
+
+type Query {
+  hello: String!
+  customer(id: ID!): Customer
+}
+
+type Mutation {
+  addCustomer(lastName: String, email: String!): Customer!
+}
+`);
+            </code></pre>
+
+        </section>
+
+        <section>
+            <h2>Code für Resolver</h2>
+            <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
+const root = {
+    // Query Implementations
+    hello: () => "Hello, World",
+    customer: ({id}) => CUSTOMERS.find(p => p.id === id),
+
+    // Mutation
+    addCustomer: ({lastName, email}) => CUSTOMERS.push(...)
+};
+               </code></pre>
+
+            <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
 const graphqlHTTP = require('express-graphql');
+
 app.use('/graphql', graphqlHTTP({
-    schema: schema,
+    schema: customerSchema,
     rootValue: root,
+
+    // enable GraphiQL Browser
     graphiql: true
 }));
                </code></pre>
-            <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
-const root = {
-    hello: () => 'Hello world!',
-    getDie: ({numSides}) => new RandomDie(numSides || 6)
-};
-               </code></pre>
-        </section>
+         </section>
         <section>
-            <h2>RandomDie-Klasse</h2>
+            <h2>Customer-Klasse</h2>
             <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-class RandomDie {
-    constructor(numSides) { this.numSides = numSides; }
-
-    rollOnce() {
-        return 1 + Math.floor(Math.random() * this.numSides);
+class Customer {
+    constructor(id, firstName, lastName, address, phones) {
+        this.firstName = firstName;
+        // more assignments. . .
     }
 
-    roll({numRolls}) {
-        let output = [];
-        for (let i = 0; i < numRolls; i++) {
-            output.push(this.rollOnce());
-        }
-        return output;
+    phonesWithType({ type }) {
+        return this.phones.filter
+            (phone => phone.phoneType === type);
     }
 }
                </code></pre>
@@ -389,71 +420,122 @@ class RandomDie {
 
         <section>
             <h3>IDEA Unterstützung</h3>
-            <p>Plugin: <a href="https://plugins.jetbrains.com/plugin/8097?pr=idea" target="_blank">https://plugins.jetbrains.com/plugin/8097?pr=idea</a></p>
-        </section>
+            <img style="margin-bottom: 2px"src="idea-getCustomer.png">
+            <img style="margin-bottom: 2px" src="idea-graphql-missing-field.png">
+            <p style="font-size:75%;margin-top: 0">Plugin: <a href="https://plugins.jetbrains.com/plugin/8097?pr=idea" target="_blank">https://plugins.jetbrains.com/plugin/8097?pr=idea</a></p>
 
-        <section>
-            <img src="idea.png">
-        </section>
 
+        </section>
         <section>
-            <h3>Code und Typ-Deklaration in einem</h3>
+            <h3>Typ-Deklaration mit Annotations</h3>
             <pre><code data-trim contenteditable class="line-numbers java" data-leftpad>
 public class Customer {
     @GraphQLField
     @GraphQLNonNull
-    public String id;
+    private String id;
 
     @GraphQLField
-    public String firstName;
+    private String lastName;
 
     @GraphQLField
-    public String lastName;
+    private Address address;
 
     @GraphQLField
-    public User user;
+    private List&lt;Phone&gt; phones;
 }
             </code></pre>
+            <p><a href="https://github.com/graphql-java/graphql-java-annotations" target="_blank">GraphQL Annotations for Java</a> </p>
         </section>
 
         <section>
             <h3>Servlet</h3>
             <pre><code data-trim contenteditable class="line-numbers java" data-leftpad>
-public class SandboxGraphQLServlet extends GraphQLServlet {
+import graphql.servlet.SimpleGraphQLServlet;
 
-    public void init(ServletConfig config) {
-        bindQueryProvider(new GraphQLQueryProvider() {
-            @Override
-            public GraphQLObjectType getQuery() {
-                return Schema.getGraphQLObjectType();
-            }
-        });
-        bindMutationProvider(new GraphQLMutationProvider() { ... }
+public class CustomerGraphQLServlet extends SimpleGraphQLServlet {
+    public CustomerGraphQLServlet() {
+        super(CustomerSchema.createCustomerQuerySchema(), null);
     }
 }
-
             </code></pre>
+            <p><a href="https://github.com/graphql-java/graphql-java-servlet" target="_blank">https://github.com/graphql-java/graphql-java-servlet</a></p>
+        </section>
+
+        <section>
+            Das Schema
+            <pre><code style="max-height: none" data-trim contenteditable class="line-numbers java" data-leftpad>
+import graphql.annotations.GraphQLAnnotations;
+import graphql.schema.GraphQLObjectType;
+import graphql.schema.GraphQLSchema;
+
+public class CustomerSchema {
+    public static GraphQLSchema createCustomerQuerySchema() {
+      // Define the Customer-Type based on Annotations
+      final GraphQLObjectType customerType =
+                GraphQLAnnotations.object(Customer.class);
+
+      GraphQLSchema schema = GraphQLSchema.newSchema()
+        // Add the "Query" type to Schema (required)
+        .query(buildCustomerQueryType(customerType))
+
+        // Add the "Mutation" type to Schema (optional)
+        .mutation(buildCustomerMutationType(customerType))
+        .build();
+      return schema;
+    }
+}
+            </code></pre>
+
         </section>
 
         <section>
             <h3>Was passiert in der Query?</h3>
-            <pre><code data-trim contenteditable class="line-numbers java" data-leftpad>
-public static GraphQLObjectType getGraphQLObjectType() {
-  return newObject()
-    .field(newFieldDefinition()
-        .type(GraphQLAnnotations.object(Customer.class))
-        .name("customer")
-        .argument(new GraphQLArgument("id",
-                                      new GraphQLNonNull(GraphQLID)))
-        .dataFetcher(environment -> {
+            <pre style="width:100%"><code  style="max-height: none" data-trim contenteditable class="line-numbers java" data-leftpad>
+    GraphQLObjectType buildQueryType(GraphQLObjectType customerType) {
+      return newObject()
+        .field(newFieldDefinition()
+          // set the name
+          .name("customer")
+          // declare return type of the query
+          .type(customerType)
+          // define args for the query
+          .argument(new GraphQLArgument("id",
+                new GraphQLNonNull(GraphQLID)))
+          // implement fetch logic
+          .dataFetcher(environment -> {
             final String id = environment.getArgument("id");
-            return customerServiceImpl.findCustomerById(id);
-        }).build()
-    ).build();
-}
+            return customerService.findCustomerById(id);
+          }).build())
+        .build();
+    }
+
             </code></pre>
         </section>
+        <section>
+            <h3>Was passiert in der Mutation?</h3>
+            <span style="font-size:85%">
+            <p>Analog zum Query</p>
+            <p>Im DataFetcher wird Logik zum Speichern implementiert</p>
+</span>
+            <pre style="width:100%"><code  style="max-height: none" data-trim contenteditable class="line-numbers java" data-leftpad>
+GraphQLObjectType buildMutationType(GraphQLObjectType customerType) {
+  return newObject()
+    .field(newFieldDefinition()
+      .name("addCustomer")
+      .type(customerType)
+      .argument(. . .)
+      .dataFetcher(environment -> {
+        final String lastName = environment.getArgument("lastName");
+        final String email = environment.getArgument("email");
+        final Customer newCustomer = customerService
+                .newCustomer(lastName, email);
+        return newCustomer;
+    }).build())
+    .build();
+}
 
+            </code></pre>
+        </section>
         <section>
             <h3>Tools</h3>
             <ul>
@@ -490,6 +572,11 @@ public static GraphQLObjectType getGraphQLObjectType() {
                 <li>Erlaubt das Senden vieler Requests über dieselbe Verbindung
                 <li>Macht das Over- und Underfetching-Argument schwächer
             </ul>
+        </section>
+
+        <section>
+            <h2>Vielen Dank!</h2>
+            <h3><em>Fragen ?</em></h3>
         </section>
 
     </div>

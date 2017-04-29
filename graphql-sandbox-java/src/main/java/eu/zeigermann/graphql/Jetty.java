@@ -22,12 +22,8 @@ public class Jetty {
         WebAppContext root = new WebAppContext();
 
         root.setContextPath("/");
-//        root.setDescriptor(webappDirLocation+"/WEB-INF/web.xml");
-        final GraphQLSchema customerSchema = CustomerSchema.createCustomerQuerySchema();
+        root.addServlet(CustomerGraphQLServlet.class, "/*");
 
-        final SimpleGraphQLServlet graphQLServlet = new SimpleGraphQLServlet(customerSchema, null);
-
-        root.addServlet(new ServletHolder(graphQLServlet), "/*");
         root.setResourceBase(webappDirLocation);
         root.setParentLoaderPriority(true);
 

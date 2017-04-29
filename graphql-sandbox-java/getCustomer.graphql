@@ -1,1 +1,13 @@
-{ customer (id: "c1") { lastName, address {city, email}, phones { phoneNumber } } }
+query
+{
+    customer(id: "c1") {
+        lastName,
+        address {
+            email
+        },
+        businessPhone: phonesWithType(type:BUSINESS)
+            {
+                phoneNumber
+            }
+    }
+}
