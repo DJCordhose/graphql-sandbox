@@ -104,29 +104,12 @@
             <p><a href="http://graphql.org/">http://graphql.org/</a></p>
         </section>
 
-        <section>
-            <h2>GraphQL</h2>
-            <ul>
-                <li class="fragment"><em><b>Query Sprache</b></em> zur strukturierten Abfrage von Daten
-                <ul>
-                    <li>Abgefragt werden Felder
-                    <li>Syntax ähnlich wie JSON
-                </ul>
-                </li>
-                <li class="fragment"><em><b>Typsystem</b></em> zur Beschreibung der API
-                    <ul>
-                        <li>API Dokumentation
-                        <li>Fehlerüberprüfung durch GraphQL
-                        <li>Tool-Support (z.B. Code Completion in IDE)</li>
-                    </ul>
-                <li class="fragment"><em><b>Laufzeitumgebung</b></em> zur Auführung der Queries auf einem Server</li>
-            </ul>
-        </section>
-
       <section>
         <h1>GraphQL praktisch</h1>
         <h3>Beispiel: Github API</h3>
       </section>
+
+        <section>
 
         <section>
             <h3>GraphiQL: API Explorer</h3>
@@ -221,15 +204,26 @@ mutation {
             <img src="testissue.png">
             <p><a href="https://github.com/DJCordhose/architecture/issues/1" target="_blank">https://github.com/DJCordhose/architecture/issues/1</a></p>
         </section>
-
-        <section>
-            <h3>Was ist GraphQL</h3>
-            <ol>
-                <li>Abfragesprache zum Zugriff auf eine API</li>
-                <li>Typsystem zum Beschreiben der API</li>
-                <li>Runtime zum Ausführen eines Zugriffs</li>
-            </ol>
         </section>
+        <section>
+            <h2>GraphQL</h2>
+            <ul>
+                <li class="fragment"><em><b>Query Sprache</b></em> zur strukturierten Abfrage von Daten
+                    <!--<ul>-->
+                        <!--<li>Abgefragt werden Felder-->
+                        <!--<li>Syntax ähnlich wie JSON-->
+                    <!--</ul>-->
+                </li>
+                <li class="fragment"><em><b>Typsystem</b></em> zur Beschreibung der API
+                    <!--<ul>-->
+                        <!--<li>API Dokumentation-->
+                        <!--<li>Fehlerüberprüfung durch GraphQL-->
+                        <!--<li>Tool-Support (z.B. Code Completion in IDE)</li>-->
+                    <!--</ul>-->
+                <li class="fragment"><em><b>Laufzeitumgebung</b></em> zur Auführung der Queries auf einem Server</li>
+            </ul>
+        </section>
+
         <section>
             <h3>Abfragesprache</h3>
             <ul>
@@ -285,8 +279,8 @@ mutation {
         <section>
             <h2>Perfektes Fetching</h2>
             <ul>
-                <li>Liefert genau das was man braucht, weder mehr noch weniger
-                <li>
+                <li class="fragment">Liefert genau das was man braucht, weder mehr noch weniger
+                <li class="fragment">
                     Weder Over- noch Underfechting notwendig
                     <ul>
                         <li>Man bekommt alle Daten mit genau einem Request</li>
@@ -294,36 +288,38 @@ mutation {
                         <li>wichtig bei schlechten Verbindungen, z.B. mobil
                     </ul>
                 </li>
-                <li>Was man bekommt ist explizit in der Query angegeben
+                <li class="fragment">Was man bekommt ist explizit in der Query angegeben
             </ul>
         </section>
 
         <section>
             <h2>Getypte API Beschreibung</h2>
             <ul>
-                <li>Mehr Anleitung durch getypte Beschreibung
-                <li>Automatische Validierung durch GraphQL
-                <li>Fehlermeldungen in der Entwicklung und zur Laufzeit</li>
+                <li class="fragment">Mehr Anleitung durch getypte Beschreibung
+                <li class="fragment">Automatische Validierung durch GraphQL
+                <li class="fragment">Fehlermeldungen in der Entwicklung und zur Laufzeit
+                <img src="idea-graphql-missing-field.png"/>
+
+            </li>
             </ul>
-            <img src="idea-graphql-missing-field.png"/>
         </section>
         <section>
             <h2>Flexibilität und Entkopplung</h2>
             <ul>
-                <li>Client kann beliebige Queries absetzen
-                <li>idealerweise keine Aufwände im Server für neue Schnittstellen
-                <li>Client- und Server-Team können getrennt voneinander entwickeln
-                <li>Erweiterungen/Änderungen ohne Versionierung der API möglich
+                <li class="fragment">Client kann beliebige Queries absetzen
+                <li class="fragment">idealerweise keine Aufwände im Server für neue Schnittstellen
+                <li class="fragment">Client- und Server-Team können getrennt voneinander entwickeln
+                <li class="fragment">Erweiterungen/Änderungen ohne Versionierung der API möglich
             </ul>
         </section>
 
         <section>
             <h2>Einheitlichkeit</h2>
             <ul>
-                <li>Es gibt nur noch einen Endpunkt
-                <li>APIs haben einen ähnlichen Aufbau
-                <li>Kommunikation auf jeden Fall über JSON
-                <li>Welche Felder wirklich benutzt werden kann überprüft und getrackt werden
+                <li class="fragment">Es gibt nur noch einen Endpunkt
+                <li class="fragment">APIs haben einen ähnlichen Aufbau
+                <li class="fragment">Kommunikation auf jeden Fall über JSON
+                <li class="fragment">Welche Felder wirklich benutzt werden kann überprüft und getrackt werden
             </ul>
         </section>
 
@@ -333,14 +329,8 @@ mutation {
         </section>
 
         <section>
-            <h2>Die JavaScript-Referenz-Implementierung</h2>
-            <p><a href="http://graphql.org/graphql-js/" target="_blank">http://graphql.org/graphql-js/</a></p>
-        </section>
-
-        <section>
-            <h3>Hello World: GraphiQL</h3>
-            <img src="reference.png">
-            <p><a href="http://localhost:4000/graphql?query=%7B%0A%20%20hello%0A%7D" target="_blank">http://localhost:4000/graphql?query=%7B%0A%20%20hello%0A%7D</a></p>
+            <h2>Implementierung in Java: <em>graphql-java</em></h2>
+            <p><a href="https://github.com/graphql-java/graphql-java">https://github.com/graphql-java/graphql-java</a></p>
         </section>
 
         <section>
@@ -349,7 +339,7 @@ mutation {
 curl -X POST \
 -H "Content-Type: application/json" \
 -d '{"query": "{ hello }"}' \
-http://localhost:4000/graphql
+http://localhost:8080
                </code></pre>
             <div class="fragment">
                 <p>Antwort:</p>
@@ -357,124 +347,6 @@ http://localhost:4000/graphql
 {"data":{"hello":"Hello world!"}}
 </code></pre>
             </div>
-        </section>
-        <section>
-            <h2>Typ-Deklarationen</h2>
-            <pre class="fragment"><code  style="max-height: none" data-trim contenteditable class="line-numbers" data-leftpad>
-type Customer {
-  # Mandatory field (note the !)
-  id: ID!
-
-  firstName: String
-  address: Address
-
-  # List of Phones
-  phones: [Phone]
-
-  # Field with (mandatory) argument
-  phonesWithType(type: PhoneType!): [Phone]
-}
-# Enum Value
-enum PhoneType { PRIVATE, BUSINESS }
-type Phone { type: PhoneType!, number: String! }
-               </code></pre>
-        </section>
-
-        <section>
-            <h2>Typ-Deklarationen</h2>
-            <p>Queries und Mutations</p>
-            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-type Query {
-  hello: String
-}
-               </code></pre>
-            <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
-type Query {
-  customer(id: ID): Customer
-}
-               </code></pre>
-            <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
-type Mutation {
-  addCustomer(lastName: String, email: String!): Customer!
-}
-               </code></pre>
-        </section>
-
-        <section>
-            <h3>Passende Query</h3>
-            <img src="query.png">
-            <p><small><a href="http://localhost:4000/graphql?query=%7B%0A%20%20customer(id%3A%20%22c1%22)%20%7B%0A%20%20%20%20lastName%2C%0A%20%20%20%20address%20%7B%20email%20%7D%2C%0A%20%20%20%20businessPhone%3A%20phonesWithType(type%3ABUSINESS)%20%7B%0A%20%20%20%20%20%20phoneNumber%0A%20%20%20%20%7D%0A%20%20%7D%0A%7Dquery" target="_blank">
-                http://localhost:4000/graphql?query=...
-            </a></small></p>
-        </section>
-
-        <section>
-            <h2>Code für Schema</h2>
-            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-const { buildSchema } = require('graphql');
-const customerSchema = buildSchema(`
-type Customer { . . . }
-
-type Query {
-  hello: String!
-  customer(id: ID!): Customer
-}
-
-type Mutation {
-  addCustomer(lastName: String, email: String!): Customer!
-}
-`);
-            </code></pre>
-
-        </section>
-
-        <section>
-            <h2>Code für Resolver</h2>
-            <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
-const root = {
-    // Query Implementations
-    hello: () => "Hello, World",
-    customer: ({id}) => CUSTOMERS.find(p => p.id === id),
-
-    // Mutation
-    addCustomer: ({lastName, email}) => CUSTOMERS.push(...)
-};
-               </code></pre>
-
-            <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
-const graphqlHTTP = require('express-graphql');
-
-app.use('/graphql', graphqlHTTP({
-    schema: customerSchema,
-    rootValue: root,
-
-    // enable GraphiQL Browser
-    graphiql: true
-}));
-               </code></pre>
-         </section>
-        <section>
-            <h2>Customer-Klasse</h2>
-            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
-class Customer {
-    constructor(id, firstName, lastName, address, phones) {
-        this.firstName = firstName;
-        // more assignments. . .
-    }
-
-    phonesWithType({ type }) {
-        return this.phones.filter
-            (phone => phone.phoneType === type);
-    }
-}
-               </code></pre>
-        </section>
-
-
-
-        <section>
-            <h2>Implementierung in Java: <em>graphql-java</em></h2>
-            <p><a href="https://github.com/graphql-java/graphql-java">https://github.com/graphql-java/graphql-java</a></p>
         </section>
 
         <section>
@@ -595,6 +467,131 @@ GraphQLObjectType buildMutationType(GraphQLObjectType customerType) {
 
             </code></pre>
         </section>
+
+        <section>
+            <h2>Die JavaScript-Referenz-Implementierung</h2>
+            <p><a href="http://graphql.org/graphql-js/" target="_blank">http://graphql.org/graphql-js/</a></p>
+        </section>
+
+        <section>
+            <h3>Hello World: GraphiQL</h3>
+            <img src="reference.png">
+            <p><a href="http://localhost:4000/graphql?query=%7B%0A%20%20hello%0A%7D" target="_blank">http://localhost:4000/graphql?query=%7B%0A%20%20hello%0A%7D</a></p>
+        </section>
+
+        <section>
+            <h2>Typ-Deklarationen</h2>
+            <pre class="fragment"><code  style="max-height: none" data-trim contenteditable class="line-numbers" data-leftpad>
+type Customer {
+  # Mandatory field (note the !)
+  id: ID!
+
+  firstName: String
+  address: Address
+
+  # List of Phones
+  phones: [Phone]
+
+  # Field with (mandatory) argument
+  phonesWithType(type: PhoneType!): [Phone]
+}
+# Enum Value
+enum PhoneType { PRIVATE, BUSINESS }
+type Phone { type: PhoneType!, number: String! }
+               </code></pre>
+        </section>
+
+        <section>
+            <h2>Typ-Deklarationen</h2>
+            <p>Queries und Mutations</p>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+type Query {
+  hello: String
+}
+               </code></pre>
+            <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
+type Query {
+  customer(id: ID): Customer
+}
+               </code></pre>
+            <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
+type Mutation {
+  addCustomer(lastName: String, email: String!): Customer!
+}
+               </code></pre>
+        </section>
+
+        <section>
+            <h3>Passende Query</h3>
+            <img src="query.png">
+            <p><small><a href="http://localhost:4000/graphql?query=query%20%7B%0A%20%20customer(id%3A%20%22c1%22)%20%7B%0A%20%20%20%20lastName%0A%20%20%20%20address%20%7B%0A%20%20%20%20%20%20email%0A%20%20%20%20%7D%0A%20%20%20%20businessPhone%3A%20phonesWithType(type%3A%20BUSINESS)%20%7B%0A%20%20%20%20%20%20phoneNumber%0A%20%20%20%20%7D%0A%20%20%7D%0A%7D%0A&operationName=undefined" target="_blank">
+                http://localhost:4000/graphql?query=...
+            </a></small></p>
+        </section>
+
+        <section>
+            <h2>Code für Schema</h2>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+const { buildSchema } = require('graphql');
+const customerSchema = buildSchema(`
+type Customer { . . . }
+
+type Query {
+  hello: String!
+  customer(id: ID!): Customer
+}
+
+type Mutation {
+  addCustomer(lastName: String, email: String!): Customer!
+}
+`);
+            </code></pre>
+
+        </section>
+
+        <section>
+            <h2>Code für Resolver</h2>
+            <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
+const root = {
+    // Query Implementations
+    hello: () => "Hello, World",
+    customer: ({id}) => CUSTOMERS.find(p => p.id === id),
+
+    // Mutation
+    addCustomer: ({lastName, email}) => CUSTOMERS.push(...)
+};
+               </code></pre>
+
+            <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
+const graphqlHTTP = require('express-graphql');
+
+app.use('/graphql', graphqlHTTP({
+    schema: customerSchema,
+    rootValue: root,
+
+    // enable GraphiQL Browser
+    graphiql: true
+}));
+               </code></pre>
+        </section>
+        <section>
+            <h2>Customer-Klasse</h2>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>
+class Customer {
+    constructor(id, firstName, lastName, address, phones) {
+        this.firstName = firstName;
+        // more assignments. . .
+    }
+
+    phonesWithType({ type }) {
+        return this.phones.filter
+            (phone => phone.phoneType === type);
+    }
+}
+               </code></pre>
+        </section>
+
+
         <section>
             <h3>Tools</h3>
             <ul>
@@ -618,18 +615,18 @@ GraphQLObjectType buildMutationType(GraphQLObjectType customerType) {
         <section>
             <h2>Es kommt drauf an...</h2>
             <ul>
-                <li>REST ist immer noch de-facto-Standard
-                <li>Serverseitige Standard-Bibliotheken für GraphQL fehlen zum Teil noch
-                <li>GraphQL-Queries werden mit POST gemacht, kann Probleme beim Caching bedeuten
-                <li>Für serverseitige Kommunikation (Microservices) scheinen binäre, getypte Protokolle wie <a href="http://www.grpc.io/" target="_blank">http://www.grpc.io/</a> noch geeigneter
+                <li class="fragment">REST ist immer noch de-facto-Standard
+                <li class="fragment">Serverseitige Standard-Bibliotheken für GraphQL fehlen zum Teil noch
+                <li class="fragment">GraphQL-Queries werden mit POST gemacht, kann Probleme beim Caching bedeuten
+                <li class="fragment">Für serverseitige Kommunikation (Microservices) scheinen binäre, getypte Protokolle wie <a href="http://www.grpc.io/" target="_blank">http://www.grpc.io/</a> noch geeigneter
             </ul>
         </section>
 
         <section>
             <h2>HTTP2</h2>
             <ul>
-                <li>Erlaubt das Senden vieler Requests über dieselbe Verbindung
-                <li>Macht das Over- und Underfetching-Argument schwächer
+                <li class="fragment">Erlaubt das Senden vieler Requests über dieselbe Verbindung
+                <li class="fragment">Macht das Over- und Underfetching-Argument schwächer
             </ul>
         </section>
 
