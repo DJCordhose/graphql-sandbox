@@ -1,1 +1,1 @@
-{ allCustomers { id, firstName, lastName } }
+query { allCustomers { id, firstName, lastName } }
