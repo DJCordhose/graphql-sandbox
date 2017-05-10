@@ -235,15 +235,18 @@ mutation {
 
         <section>
             <h3>Abfragesprache</h3>
+            <pre><code data-trim contenteditable class="line-numbers" data-leftpad>query {
+  customer (id: "c1") {
+    lastname, adress { email }
+  }
+}
+            </code></pre>
             <ul>
                 <li>Strukturierte Sprache zum Zugriff auf eine API</li>
                 <li>Sieht aus wie JSON (ist es aber nicht)</li>
                 <li>Abgefragt werden einzelne Felder von (verschachtelten) Objekten</li>
                 <li>Felder können Parameter haben (ähnlich wie Funktionen)</li>
             </ul>
-            <pre class="fragment"><code data-trim contenteditable class="line-numbers" data-leftpad>
-                query { customer (id: "c1") { lastname, adress { email } } }
-            </code></pre>
 
         </section>
         <section>
@@ -367,8 +370,8 @@ http://localhost:8080
 
         </section>
         <section>
-            <h3>Typ-Deklaration mit Annotations</h3>
-            <pre><code data-trim contenteditable class="line-numbers java" data-leftpad>
+      <h3>Typ-Deklaration mit Annotations</h3>
+      <pre><code data-trim contenteditable class="line-numbers java" data-leftpad>
 public class Customer {
     @GraphQLField
     @GraphQLNonNull
@@ -384,9 +387,26 @@ public class Customer {
     private List&lt;Phone&gt; phones;
 }
             </code></pre>
-            <p><a href="https://github.com/graphql-java/graphql-java-annotations" target="_blank">GraphQL Annotations for Java</a> </p>
-        </section>
+      <p><a href="https://github.com/graphql-java/graphql-java-annotations" target="_blank">GraphQL Annotations for Java</a> </p>
+    </section>
+      <section>
+        <h3>Felder mit Parametern</h3>
+        <pre><code data-trim contenteditable class="line-numbers java" data-leftpad>
+enum PhoneType { BUSINESS, PRIVATE }
 
+public class Customer {
+  private List&lt;Phone&gt; phones;
+
+  @GraphQLField
+  public List&lt;Phone&gt; phonesWithType(
+          @GraphQLName("type") PhoneType type) {
+    return phones.stream()
+      .filter(phone -> phone.getPhoneType() == type)
+      .collect(Collectors.toList());
+    }
+}
+            </code></pre>
+      </section>
         <section>
             <h3>Servlet</h3>
             <pre><code data-trim contenteditable class="line-numbers java" data-leftpad>
